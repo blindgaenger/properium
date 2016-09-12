@@ -1,3 +1,3 @@
 # prop-model
 
-Define properties and their validation to create a model class.
+Define properties and their validations to create your model classes.

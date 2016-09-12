@@ -1,12 +1,16 @@
 {
   "name": "prop-model",
   "version": "1.0.0",
-  "description": "",
+  "description": "Define properties and their validations to create your model classes.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
+  }
 }
