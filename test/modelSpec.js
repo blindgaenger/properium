@@ -2,49 +2,49 @@
 
 const expect = require('chai').expect
 
-const PropModel = require('../lib/model').PropModel
-const PropError = require('../lib/error').PropError
+const ProperiumModel = require('../lib/model').ProperiumModel
+const ProperiumError = require('../lib/error').ProperiumError
 
 describe('model', () => {
   it('fails for unknown properties', () => {
-    class Person extends PropModel {}
+    class Person extends ProperiumModel {}
 
     const person = new Person()
     person.name = 'FOO'
 
     expect(() => person.validate())
-      .to.throw(PropError, 'unknown prop')
+      .to.throw(ProperiumError, 'unknown prop')
       .and.to.have.property('prop', 'name')
   })
 
   it('fails for undefined properties', () => {
-    class Person extends PropModel {}
+    class Person extends ProperiumModel {}
     Person.defineProp('name', {})
 
     const person = new Person()
 
     expect(() => person.validate())
-      .to.throw(PropError, 'undefined prop')
+      .to.throw(ProperiumError, 'undefined prop')
       .and.to.have.property('prop', 'name')
   })
 
   it('fails for nested properties', () => {
-    class Pet extends PropModel {}
+    class Pet extends ProperiumModel {}
     Pet.defineProp('name', { type: 'string' })
 
-    class Person extends PropModel {}
+    class Person extends ProperiumModel {}
     Person.defineProp('pet', { type: Pet })
 
     const person = new Person()
     person.pet = new Pet()
 
     expect(() => person.validate('root'))
-      .to.throw(PropError, 'undefined prop')
+      .to.throw(ProperiumError, 'undefined prop')
       .and.to.have.property('prop', 'root.pet.name')
   })
 
   it('passes for defined properties', () => {
-    class Person extends PropModel {}
+    class Person extends ProperiumModel {}
     Person.defineProp('name', {})
 
     const person = new Person()

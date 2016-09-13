@@ -1,13 +1,13 @@
 'use strict'
 
-const PropModel = require('../lib/index').PropModel
-const PropError = require('../lib/index').PropError
+const ProperiumModel = require('../lib/index').ProperiumModel
+const ProperiumError = require('../lib/index').ProperiumError
 
-class Friend extends PropModel {}
+class Friend extends ProperiumModel {}
 Friend.defineProp('name', { type: 'string', required: true })
 Friend.defineProp('gender', { type: 'string', oneOf: ['f', 'm'] })
 
-class Person extends PropModel {}
+class Person extends ProperiumModel {}
 Person.defineProp('name', { type: 'string', required: true })
 Person.defineProp('age', { type: 'number', required: false })
 Person.defineProp('friends', { type: 'array', subtype: Friend, defaultValue: [] })
@@ -25,7 +25,7 @@ try {
   person.validate('person')
   console.log(JSON.stringify(person, null, 2))
 } catch (err) {
-  if (err instanceof PropError) {
+  if (err instanceof ProperiumError) {
     console.error(err)
   } else {
     throw err

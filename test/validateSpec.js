@@ -3,7 +3,7 @@
 const expect = require('chai').expect
 
 const validate = require('../lib/validate').validate
-const PropError = require('../lib/error').PropError
+const ProperiumError = require('../lib/error').ProperiumError
 
 describe('validate', () => {
   describe('prop', () => {
@@ -11,7 +11,7 @@ describe('validate', () => {
       const object = {}
       const validation = { prop: 'id' }
       expect(() => validate('root', object, validation))
-        .to.throw(PropError, 'undefined prop')
+        .to.throw(ProperiumError, 'undefined prop')
         .and.to.have.property('prop', 'root.id')
     })
 
@@ -43,7 +43,7 @@ describe('validate', () => {
       const object = { id: undefined }
       const validation = { prop: 'id', required: true }
       expect(() => validate('root', object, validation))
-        .to.throw(PropError, 'required value')
+        .to.throw(ProperiumError, 'required value')
         .and.to.have.property('prop', 'root.id')
     })
 
@@ -59,7 +59,7 @@ describe('validate', () => {
       const object = { id: 'QUX' }
       const validation = { prop: 'id', oneOf: ['FOO', 'BAR'] }
       expect(() => validate('root', object, validation))
-        .to.throw(PropError, 'unknown value')
+        .to.throw(ProperiumError, 'unknown value')
         .and.to.have.property('prop', 'root.id')
     })
 
@@ -76,7 +76,7 @@ describe('validate', () => {
         const object = { id: 42 }
         const validation = { prop: 'id', type: 'string' }
         expect(() => validate('root', object, validation))
-          .to.throw(PropError, 'invalid type')
+          .to.throw(ProperiumError, 'invalid type')
           .and.to.have.property('prop', 'root.id')
       })
 
@@ -92,7 +92,7 @@ describe('validate', () => {
         const object = { id: 'FOO' }
         const validation = { prop: 'id', type: 'number' }
         expect(() => validate('root', object, validation))
-          .to.throw(PropError, 'invalid type')
+          .to.throw(ProperiumError, 'invalid type')
           .and.to.have.property('prop', 'root.id')
       })
 
@@ -108,7 +108,7 @@ describe('validate', () => {
         const object = { id: 'FOO' }
         const validation = { prop: 'id', type: 'array' }
         expect(() => validate('root', object, validation))
-          .to.throw(PropError, 'invalid type')
+          .to.throw(ProperiumError, 'invalid type')
           .and.to.have.property('prop', 'root.id')
       })
 
@@ -124,7 +124,7 @@ describe('validate', () => {
         const object = { id: 'FOO' }
         const validation = { prop: 'id', type: 'object' }
         expect(() => validate('root', object, validation))
-          .to.throw(PropError, 'invalid type')
+          .to.throw(ProperiumError, 'invalid type')
           .and.to.have.property('prop', 'root.id')
       })
 
@@ -142,7 +142,7 @@ describe('validate', () => {
         const object = { id: 'FOO' }
         const validation = { prop: 'id', type: ID }
         expect(() => validate('root', object, validation))
-          .to.throw(PropError, 'invalid type')
+          .to.throw(ProperiumError, 'invalid type')
           .and.to.have.property('prop', 'root.id')
       })
 
@@ -165,7 +165,7 @@ describe('validate', () => {
       const object = { id: 42 }
       const validation = { prop: 'id', length: 1 }
       expect(() => validate('root', object, validation))
-        .to.throw(PropError, 'invalid length')
+        .to.throw(ProperiumError, 'invalid length')
         .and.to.have.property('prop', 'root.id')
     })
 
@@ -173,7 +173,7 @@ describe('validate', () => {
       const object = { id: ['FOO'] }
       const validation = { prop: 'id', length: 2 }
       expect(() => validate('root', object, validation))
-        .to.throw(PropError, 'invalid length')
+        .to.throw(ProperiumError, 'invalid length')
         .and.to.have.property('prop', 'root.id')
     })
 
@@ -181,7 +181,7 @@ describe('validate', () => {
       const object = { id: ['FOO', 'BAR'] }
       const validation = { prop: 'id', length: 1 }
       expect(() => validate('root', object, validation))
-        .to.throw(PropError, 'invalid length')
+        .to.throw(ProperiumError, 'invalid length')
         .and.to.have.property('prop', 'root.id')
     })
 
@@ -195,7 +195,7 @@ describe('validate', () => {
       const object = { id: ['FOO'] }
       const validation = { prop: 'id', length: [2, 3] }
       expect(() => validate('root', object, validation))
-        .to.throw(PropError, 'invalid length')
+        .to.throw(ProperiumError, 'invalid length')
         .and.to.have.property('prop', 'root.id')
     })
 
@@ -203,7 +203,7 @@ describe('validate', () => {
       const object = { id: ['FOO', 'BAR'] }
       const validation = { prop: 'id', length: [0, 1] }
       expect(() => validate('root', object, validation))
-        .to.throw(PropError, 'invalid length')
+        .to.throw(ProperiumError, 'invalid length')
         .and.to.have.property('prop', 'root.id')
     })
 
@@ -236,7 +236,7 @@ describe('validate', () => {
       const object = { id: 'FOO' }
       const validation = { prop: 'id', subtype: 'string' }
       expect(() => validate('root', object, validation))
-        .to.throw(PropError, 'invalid subtype')
+        .to.throw(ProperiumError, 'invalid subtype')
         .and.to.have.property('prop', 'root.id')
     })
 
@@ -244,7 +244,7 @@ describe('validate', () => {
       const object = { id: [42] }
       const validation = { prop: 'id', subtype: 'string' }
       expect(() => validate('root', object, validation))
-        .to.throw(PropError, 'invalid type')
+        .to.throw(ProperiumError, 'invalid type')
         .and.to.have.property('prop', 'root.id.[0]')
     })
 
@@ -259,13 +259,13 @@ describe('validate', () => {
     it('rejects an invalid prop', () => {
       class ID {
         validate () {
-          throw new PropError('SOURCE', 'MESSAGE')
+          throw new ProperiumError('SOURCE', 'MESSAGE')
         }
       }
       const object = { id: new ID() }
       const validation = { prop: 'id' }
       expect(() => validate('root', object, validation))
-        .to.throw(PropError, 'MESSAGE')
+        .to.throw(ProperiumError, 'MESSAGE')
         .and.to.have.property('prop', 'SOURCE')
     })
 

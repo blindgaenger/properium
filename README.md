@@ -1,4 +1,4 @@
-# prop-model
+# properium
 
 Define properties and their validations to create your model classes.
 
@@ -7,3 +7,4 @@ Define properties and their validations to create your model classes.
 - use validator.js for types => https://github.com/chriso/validator.js#validators
 - register own types
 - required: false => makes prop optional
+- example im README
