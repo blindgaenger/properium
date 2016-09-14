@@ -5,7 +5,7 @@ const ProperiumError = require('../lib/index').ProperiumError
 
 class Friend extends ProperiumModel {}
 Friend.defineProp('name', { type: 'string', required: true })
-Friend.defineProp('gender', { type: 'string', oneOf: ['f', 'm'] })
+Friend.defineProp('mood', { type: 'string', oneOf: ['GOOD', 'BAD'] })
 
 class Person extends ProperiumModel {}
 Person.defineProp('name', { type: 'string', required: true })
@@ -15,11 +15,13 @@ Person.defineProp('friends', { type: 'array', subtype: Friend, defaultValue: [] 
 const person = new Person()
 person.name = 'Fred'
 person.age = 42
-person.friends = []
 
 const friend = new Friend()
 friend.name = 'Amy'
-friend.gender = 'f'
+friend.mood = 'GOOD'
+
+// person.friends is initialized with []
+person.friends.push(friend)
 
 try {
   person.validate('person')
