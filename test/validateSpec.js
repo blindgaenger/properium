@@ -284,5 +284,12 @@ describe('validate', () => {
       const validation = { prop: 'id' }
       validate('root', object, validation)
     })
+
+    it ('returns the object after validate', () => {
+      const object = { id: 'FOO' }
+      const validation = { prop: 'id' }
+      const result = validate('root', object, validation)
+      expect(result).to.equal(object)
+    })
   })
 })

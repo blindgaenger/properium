@@ -61,4 +61,13 @@ describe('model', () => {
 
     person.validate()
   })
+
+  it ('returns the model after validate', () => {
+    class Person extends ProperiumModel {}
+    const person = new Person()
+
+    const result = person.validate()
+
+    expect(result).to.equal(person)
+  })
 })
