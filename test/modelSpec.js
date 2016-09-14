@@ -6,6 +6,15 @@ const ProperiumModel = require('../lib/model').ProperiumModel
 const ProperiumError = require('../lib/error').ProperiumError
 
 describe('model', () => {
+  it('inits properties with the defaultValue', () => {
+    class Person extends ProperiumModel {}
+    Person.defineProp('name', { defaultValue: 'DEFAULT' })
+
+    const person = new Person()
+
+    expect(person.name).to.equal('DEFAULT');
+  })
+
   it('fails for unknown properties', () => {
     class Person extends ProperiumModel {}
 
