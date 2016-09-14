@@ -1,6 +1,6 @@
 {
   "name": "properium",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Define properties and their validations to create your model classes.",
   "main": "lib/index.js",
   "scripts": {
