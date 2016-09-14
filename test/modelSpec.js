@@ -6,13 +6,33 @@ const ProperiumModel = require('../lib/model').ProperiumModel
 const ProperiumError = require('../lib/error').ProperiumError
 
 describe('model', () => {
-  it('inits properties with the defaultValue', () => {
+  it('inits primitive props with defaultValue', () => {
     class Person extends ProperiumModel {}
-    Person.defineProp('name', { defaultValue: 'DEFAULT' })
+    Person.defineProp('name', { defaultValue: 'FOO' })
 
     const person = new Person()
 
-    expect(person.name).to.equal('DEFAULT');
+    expect(person.name).to.equal('FOO');
+  })
+
+  it('inits class props with defaultValue', () => {
+    class Name {}
+    class Person extends ProperiumModel {}
+    Person.defineProp('name', { defaultValue: Name })
+
+    const person = new Person()
+
+    expect(person.name).to.be.instanceOf(Name);
+  })
+
+  it('inits function props with defaultValue', () => {
+    const initName = () => 'FOO'
+    class Person extends ProperiumModel {}
+    Person.defineProp('name', { defaultValue: initName })
+
+    const person = new Person()
+
+    expect(person.name).to.equal('FOO');
   })
 
   it('fails for unknown properties', () => {
