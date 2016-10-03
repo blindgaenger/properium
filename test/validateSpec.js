@@ -29,22 +29,6 @@ describe('validate', () => {
     })
   })
 
-  describe('defaultValue', () => {
-    it('allows undefined props', () => {
-      const object = {}
-      const prop = { name: 'id', name: 'id', defaultValue: 'DEFAULT' }
-      validateProp('root', object, prop)
-      expect(object.id).to.equal('DEFAULT')
-    })
-
-    it('allows the original value', () => {
-      const object = { id: 'ORIGINAL'}
-      const prop = { name: 'id', name: 'id', defaultValue: 'DEFAULT' }
-      validateProp('root', object, prop)
-      expect(object.id).to.equal('ORIGINAL')
-    })
-  })
-
   describe('required', () => {
     it('rejects an undefined value', () => {
       const object = { id: undefined }
