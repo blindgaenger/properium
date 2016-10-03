@@ -50,7 +50,7 @@ describe('model', () => {
       .and.to.have.property('prop', 'name')
   })
 
-  it ('returns the model after validate', () => {
+  it('returns the model after validate', () => {
     class Person extends ProperiumModel {}
     const person = new Person()
 
