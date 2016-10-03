@@ -2,14 +2,40 @@
 
 const expect = require('chai').expect
 
+const validateProps = require('../lib/validate').validateProps
 const validateProp = require('../lib/validate').validateProp
 const ProperiumError = require('../lib/error').ProperiumError
 
 describe('validate', () => {
-  describe('validateProp', () => {
-    it ('returns the object after validate', () => {
+  describe('validateProps', () => {
+    it('returns the object after validate', () => {
       const object = { id: 'FOO' }
-      const prop = { name: 'id', name: 'id' }
+      const props = [{ name: 'id' }]
+      const result = validateProps('root', object, props)
+      expect(result).to.equal(object)
+    })
+
+    it('fails for unknown properties', () => {
+      const object = { id: 'FOO' }
+      const props = []
+      expect(() => validateProps('root', object, props))
+        .to.throw(ProperiumError, 'unknown prop')
+        .and.to.have.property('prop', 'root.id')
+    })
+
+    it('fails for undefined properties', () => {
+      const object = {}
+      const props = [{ name: 'id' }]
+      expect(() => validateProps('root', object, props))
+        .to.throw(ProperiumError, 'undefined prop')
+        .and.to.have.property('prop', 'root.id')
+    })
+  })
+
+  describe('validateProp', () => {
+    it('returns the object after validate', () => {
+      const object = { id: 'FOO' }
+      const prop = { name: 'id' }
       const result = validateProp('root', object, prop)
       expect(result).to.equal(object)
     })
@@ -17,7 +43,7 @@ describe('validate', () => {
     describe('prop', () => {
       it('rejects undefined props', () => {
         const object = {}
-        const prop = { name: 'id', name: 'id' }
+        const prop = { name: 'id' }
         expect(() => validateProp('root', object, prop))
           .to.throw(ProperiumError, 'undefined prop')
           .and.to.have.property('prop', 'root.id')
@@ -25,7 +51,7 @@ describe('validate', () => {
 
       it('allows prop with a value of undefined', () => {
         const object = { id: undefined }
-        const prop = { name: 'id', name: 'id' }
+        const prop = { name: 'id' }
         validateProp('root', object, prop)
       })
     })
@@ -33,7 +59,7 @@ describe('validate', () => {
     describe('required', () => {
       it('rejects an undefined value', () => {
         const object = { id: undefined }
-        const prop = { name: 'id', name: 'id', required: true }
+        const prop = { name: 'id', required: true }
         expect(() => validateProp('root', object, prop))
           .to.throw(ProperiumError, 'required value')
           .and.to.have.property('prop', 'root.id')
@@ -41,7 +67,7 @@ describe('validate', () => {
 
       it('allows a defined value', () => {
         const object = { id: 'FOO' }
-        const prop = { name: 'id', name: 'id', required: true }
+        const prop = { name: 'id', required: true }
         validateProp('root', object, prop)
       })
     })
@@ -254,7 +280,7 @@ describe('validate', () => {
           }
         }
         const object = { id: new ID() }
-        const prop = { name: 'id', name: 'id' }
+        const prop = { name: 'id' }
         expect(() => validateProp('root', object, prop))
           .to.throw(ProperiumError, 'MESSAGE')
           .and.to.have.property('prop', 'SOURCE')
@@ -265,14 +291,14 @@ describe('validate', () => {
           validate() {}
         }
         const object = { id: new ID() }
-        const prop = { name: 'id', name: 'id' }
+        const prop = { name: 'id' }
         validateProp('root', object, prop)
       })
 
       it('ignores non-validatable', () => {
         class ID {}
         const object = { id: new ID() }
-        const prop = { name: 'id', name: 'id' }
+        const prop = { name: 'id' }
         validateProp('root', object, prop)
       })
     })
