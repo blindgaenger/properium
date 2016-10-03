@@ -21,7 +21,7 @@ describe('use cases', () => {
   it('works with defaults', () => {
     class Person extends ProperiumModel {}
     Person.defineProp('name', { type: 'string', required: true })
-    Person.defineProp('friends', { type: 'array', subtype: 'string', defaultValue: [] });
+    Person.defineProp('friends', { type: 'array', subtype: 'string', defaultValue: [] })
 
     const alice = new Person()
     alice.name = 'ALICE'
