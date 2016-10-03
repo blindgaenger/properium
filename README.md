@@ -1,13 +1,24 @@
 # properium
 
-Define properties and their validations to create your model classes.
+Define properties on your model class to validate them.
 
 ## TODO
 
 - use validator.js for types => https://github.com/chriso/validator.js#validators
 - register own types
-- check validation for unknown properties (own dog food)
+- validate props for unknown properties (own dog food)
 - example im README
+- better /examples
+- TBD: use Object.defineProperty
 - TBD: required: false => makes prop optional
 - TBD: validate on toJSON
-- use classes as types, not strings (String, Boolean, Number, ...)
+- use types for type and subtype (not strings)
+  - Undefined
+  - Null
+  - Boolean
+  - String
+  - Number
+  - Object
+    - Function
+    - Array
+    - RegExp

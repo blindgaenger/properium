@@ -1,7 +1,7 @@
 {
   "name": "properium",
   "version": "0.1.2",
-  "description": "Define properties and their validations to create your model classes.",
+  "description": "Define properties on your model class to validate them.",
   "main": "lib/index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha"
