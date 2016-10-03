@@ -1,4 +1,5 @@
 # properium
+[![Build Status](https://travis-ci.org/blindgaenger/properium.svg?branch=master)](https://travis-ci.org/blindgaenger/properium)
 
 Define properties on your model class to validate them.
 
